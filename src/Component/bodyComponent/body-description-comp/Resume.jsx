@@ -1,6 +1,6 @@
 import React from 'react'
 import './resume.css'
-
+import Lang from './languagesComponent/Lang'
 function Resume(props) {
     console.log(props)
 
@@ -9,6 +9,8 @@ function Resume(props) {
         return null
 
     }
+    const langArray = [];
+    props.userData.data.user.repositories.nodes.forEach((repo) => { langArray.push(repo.languages.edges.map((lang) => { return lang.node.name })) })
     return (
 
         <div className="description">
@@ -18,15 +20,7 @@ function Resume(props) {
             <span><a className="user-url" href="#">{props.userData.data.user.url}</a></span>
             <p className="user-description">On Github since {props.userData.data.user.createdAt.substring(0, 10)}, {props.userData.data.user.name} is a developer based in {props.userData.data.user.location}, with {props.userData.data.user.repositories.totalCount} repositories and {props.userData.data.user.followers.totalCount} followers  </p>
             <div className="user-langauages">
-                <h2>langauages</h2>
-                {
-                    props.userData.data.user.repositories.nodes.map((repo) => {
-                        const combined = [];
-                        const newArray = repo.languages.edges.map((a) => combined.push(a.node.name))
-                        return console.log(combined)
-                    })
-                })
-            }
+                <Lang props={langArray} />
             </div>
             <div className="user-repos">
                 <h2>Popular Repositories</h2>
