@@ -59,6 +59,7 @@
     color: rgb(255, 0, 0);
     font-weight: bold;
     font-size: 18px;
+    margin-bottom: 1vh;
 }
 
 .repo-lang {}
@@ -70,4 +71,9 @@
 .user-description {
     margin-right: 4vw;
     margin-left: 4vw;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(255, 0, 0);
 }

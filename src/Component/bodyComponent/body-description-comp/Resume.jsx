@@ -19,6 +19,14 @@ function Resume(props) {
             <p className="user-description">On Github since {props.userData.data.user.createdAt.substring(0, 10)}, {props.userData.data.user.name} is a developer based in {props.userData.data.user.location}, with {props.userData.data.user.repositories.totalCount} repositories and {props.userData.data.user.followers.totalCount} followers  </p>
             <div className="user-langauages">
                 <h2>langauages</h2>
+                {
+                    props.userData.data.user.repositories.nodes.map((repo) => {
+                        const combined = [];
+                        const newArray = repo.languages.edges.map((a) => combined.push(a.node.name))
+                        return console.log(combined)
+                    })
+                })
+            }
             </div>
             <div className="user-repos">
                 <h2>Popular Repositories</h2>
