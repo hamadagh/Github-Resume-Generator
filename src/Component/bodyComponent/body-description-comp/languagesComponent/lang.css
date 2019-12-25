@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+
+}
+
+.lang-container {
+    width: 100%;
+}
+
+.lang-title {
+    color: rgb(252, 32, 87);
+
+}
+
+.bar-container {
+    width: 80px;
+    height: 5px;
+    background-color: rgba(128, 128, 128, 0.377);
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.progressive-bar {
+    height: 5px;
+    background-color: rgb(252, 32, 87);
+    border-radius: 15px;
+
+}

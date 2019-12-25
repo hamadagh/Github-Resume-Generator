@@ -3,6 +3,11 @@
     background-color: whitesmoke;
 }
 
+.github-username {
+    margin-bottom: 2vh;
+    font-weight: 800;
+}
+
 .form {
     width: 80%;
     height: 17vh;
@@ -42,7 +47,9 @@
     width: 9vw;
     height: 30px;
     color: white;
-    background-color: #ff6347;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: rgb(255, 32, 88);
     border: none;
     border-radius: 15px;
 }

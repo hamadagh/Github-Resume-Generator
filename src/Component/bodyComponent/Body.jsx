@@ -97,7 +97,7 @@ const Body = () => {
 
             <div className="form">
                 <div className="form-group">
-                    <p>Github username</p>
+                    <span className="github-username">Github username</span>
                     <div className="form-input-group">
                         <form onSubmit={handleSearchSubmit}>
                             <input
