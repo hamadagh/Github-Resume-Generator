@@ -3,20 +3,16 @@ import './lang.css'
 
 
 const Lang = (props) => {
-    console.log(props.props)
-    const mergedLanguages = [];
-    props.props.forEach((array) => { array.map((lang) => { mergedLanguages.push(lang) }) })
-    const uniqueLanguages = [...new Set(mergedLanguages)]
-    console.log(mergedLanguages);
-    console.log(uniqueLanguages);
 
+    const mergedLanguages = [];
+    props.props.forEach((array) => { array.map((lang) => { return mergedLanguages.push(lang) }) })
+    const uniqueLanguages = [...new Set(mergedLanguages)]
     const countLanguageUsed = {};
     mergedLanguages.forEach(function (i) { countLanguageUsed[i] = (countLanguageUsed[i] || 0) + 1; });
-    console.log(countLanguageUsed);
+    console.log(uniqueLanguages);
 
     const languageValue = Object.values(countLanguageUsed);
     const totalLanguageValue = languageValue.reduce((total, num) => total + num)
-    console.log(totalLanguageValue)
     var arrayOfLangAndPercentage = [];
     for (let key in countLanguageUsed) {
         let value = countLanguageUsed[key];
@@ -25,7 +21,6 @@ const Lang = (props) => {
         arrayOfLangAndPercentage.push({ key, valuePercentage });
 
     }
-    console.log(arrayOfLangAndPercentage)
     return (
         <div className="languages">
             <h2>Languages</h2>

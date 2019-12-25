@@ -61,9 +61,8 @@ const Body = () => {
             .post('', { query: GET_USER })
             .then(data => {
 
-                console.log(data)
+
                 setUserData(data)
-                console.log(userData)
                 if (data.data.data.user === null) {
                     setError(true)
                 }
