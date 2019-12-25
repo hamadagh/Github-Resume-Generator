@@ -5,7 +5,7 @@ import REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN from '../../config';
 import Resume from './body-description-comp/Resume';
 
 const Body = () => {
-
+    const [inputValue, setInputValue] = useState('');
     const [userName, setUserName] = useState({ userName: '' })
     const [userData, setUserData] = useState({})
     const [error, setError] = useState(null)
@@ -21,68 +21,74 @@ const Body = () => {
             },
         });
 
-        const GET_USER = `{
-            user(login: "${userName.userName}") {
-              name
-              url
-              bio
-              createdAt
-              location
-              followers {
-                totalCount
-              }
-              repositories(first: 100) {
-                nodes {
-                  ... on Repository {
-                    name
-                    createdAt
-                    updatedAt
-                    description
-                    url
-                    languages(first: 50, orderBy: {field: SIZE, direction: DESC}) {
-                      edges {
-                        size
-                        node {
-                          name
+        const GET_USER = `
+            {
+                user(login: "${userName.userName}") {
+                  name
+                  url
+                  bio
+                  createdAt
+                  location
+                  followers {
+                    totalCount
+                  }
+                  topRepositories(first: 5, orderBy: {field: UPDATED_AT, direction: ASC}) {
+                    nodes {
+                      name
+                      createdAt
+                      updatedAt
+                      description
+                      forkCount
+                      url
+                      languages(first: 50, orderBy: {field: SIZE, direction: DESC}) {
+                        edges {
+                          size
+                          node {
+                            name
+                          }
                         }
                       }
                     }
+                    totalCount
                   }
                 }
-                totalCount
               }
-            }
-          }`;
-
+              
+        `
 
 
         axiosGitHubGraphQL
             .post('', { query: GET_USER })
             .then(data => {
+
                 console.log(data)
                 setUserData(data)
-
-
+                console.log(userData)
+                if (data.data.data.user === null) {
+                    setError(true)
+                }
+                else if (data.data.data.user !== null) {
+                    setError(null)
+                }
             })
 
-            .catch((e) => {
+            .finally(setTimeout(function () {
 
-                setError(e)
-
-            })
-            .finally(setTimeout(function () { setLoading(false); }, 3000))
+                setLoading(false);
+            }, 3000))
 
     }
 
     const handleSearchSubmit = (e) => {
         e.preventDefault()
-
         getUserData()
+        setInputValue(``)
 
 
     }
     const handleChange = (e) => {
         setUserName({ userName: `${e.target.value}` })
+        setInputValue(`${e.target.value}`)
 
     }
 
@@ -105,6 +111,7 @@ const Body = () => {
                                 placeholder="John Doe"
                                 id="url"
                                 type="text"
+                                value={inputValue}
                                 onChange={handleChange}
                             />
                             <button type="submit" className="submit-button">
@@ -115,7 +122,7 @@ const Body = () => {
                     </div>
                 </div>
             </div>
-            <Resume userData={userData.data} loading={loading} />
+            <Resume userData={userData.data} loading={loading} error={error} />
         </div>
     )
 
