@@ -4,6 +4,7 @@ import axios from 'axios';
 import Resume from './body-description-comp/Resume';
 
 const Body = () => {
+    const myKey = process.env.REACT_APP_GITHUB_API_KEY;
     const [inputValue, setInputValue] = useState('');
     const [userName, setUserName] = useState({ userName: '' })
     const [userData, setUserData] = useState({})
@@ -15,7 +16,7 @@ const Body = () => {
             baseURL: 'https://api.github.com/graphql',
             headers: {
                 Authorization: `bearer ${
-                    process.env.REACT_APP_GITHUB_API_KEY
+                    myKey
                     }`,
             },
         });
