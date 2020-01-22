@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './body.css';
 import axios from 'axios';
-import REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN from '../../config';
 import Resume from './body-description-comp/Resume';
 
 const Body = () => {
@@ -16,7 +15,7 @@ const Body = () => {
             baseURL: 'https://api.github.com/graphql',
             headers: {
                 Authorization: `bearer ${
-                    REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
+                    process.env.REACT_APP_GITHUB_API_KEY
                     }`,
             },
         });
